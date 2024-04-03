@@ -5,7 +5,7 @@ pipeline {
         stage('Check Branch') {
             steps {
                 script {
-                    def branch = bat(returnStdout: true, script: 'git rev-parse --abbrev-ref HEAD').trim()
+                    def branch = sh(returnStdout: true, script: 'git rev-parse --abbrev-ref HEAD').trim()
                     if (branch != 'develop') {
                         error "Build can only be run on the 'develop' branch"
                     }
