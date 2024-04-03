@@ -6,7 +6,7 @@ class Calculator{
 
 
     private void display(){
-        System.out.print("Result: hello world ");
+        System.out.print("Result: Hi this is bot ");
     }
 
     public static void main(String []args){
