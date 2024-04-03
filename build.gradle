@@ -22,6 +22,25 @@ sourceSets {
     }
 }
 
+
+task countMainFiles {
+    doLast {
+        def mainDir = file('src/main')
+        def mainFiles = mainDir.listFiles().findAll { it.isFile() && it.name.endsWith('.java') }
+
+        println "Number of main files: ${mainFiles.size()}"
+    }
+}
+
+task countTestFiles {
+    doLast {
+        def testDir = file('src/test')
+        def testFiles = testDir.listFiles().findAll { it.isFile() && it.name.endsWith('.java') }
+
+        println "Number of test files: ${testFiles.size()}"
+    }
+}
+
 dependencies {
     testImplementation platform('org.junit:junit-bom:5.9.1')
     testImplementation 'org.junit.jupiter:junit-jupiter'
