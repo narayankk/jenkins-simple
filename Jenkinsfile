@@ -2,31 +2,28 @@ pipeline {
     agent any
 
     stages {
-        stage('Checkout') {
+        stage('Check Branch') {
             steps {
-                // Checkout the source code from Git
-                git 'https://github.com/narayankk/jenkins-simple.git'
+                script {
+                    def branch = bat(returnStdout: true, script: 'git rev-parse --abbrev-ref HEAD').trim()
+                    if (branch != 'develop') {
+                        error "Build can only be run on the 'develop' branch"
+                    }
+                }
             }
         }
 
         stage('Build') {
             steps {
                 // Build the project using Gradle
-                sh './gradlew build'
+                bat './gradlew build'
             }
         }
 
         stage('Test') {
             steps {
                 // Run tests using Gradle
-                sh './gradlew test'
-            }
-        }
-
-        stage('Archive') {
-            steps {
-                // Archive the built artifacts
-                archiveArtifacts artifacts: 'build/libs/*.jar', fingerprint: true
+                bat './gradlew test'
             }
         }
     }
