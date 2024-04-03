@@ -7,7 +7,7 @@ pipeline {
         stage('Build') {
             steps {
                 // Build the project using Gradle
-                sh './gradlew build'
+                bat './gradlew build'
             }
         }
 
