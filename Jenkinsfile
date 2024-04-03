@@ -14,16 +14,11 @@ pipeline {
         stage('Test') {
             steps {
                 // Run tests using Gradle
-                sh './gradlew test'
+                bat './gradlew test'
             }
         }
 
-        stage('Archive') {
-            steps {
-                // Archive the built artifacts
-                archiveArtifacts artifacts: 'build/libs/*.jar', fingerprint: true
-            }
-        }
+
     }
 
     post {
