@@ -2,7 +2,16 @@ pipeline {
     agent any
 
     stages {
-
+        stage('Check Branch') {
+            steps {
+                script {
+                    def branch = sh(returnStdout: true, script: 'git rev-parse --abbrev-ref HEAD').trim()
+                    if (branch != 'develop') {
+                        error "Build can only be run on the 'develop' branch"
+                    }
+                }
+            }
+        }
 
         stage('Build') {
             steps {
@@ -17,8 +26,6 @@ pipeline {
                 bat './gradlew test'
             }
         }
-
-
     }
 
     post {
