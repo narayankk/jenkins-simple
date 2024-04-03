@@ -2,12 +2,7 @@ pipeline {
     agent any
 
     stages {
-        stage('Checkout') {
-            steps {
-                // Checkout the source code from Git
-                git 'https://github.com/narayankk/jenkins-simple.git'
-            }
-        }
+
 
         stage('Build') {
             steps {
